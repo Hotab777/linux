@@ -34,7 +34,7 @@ struct loop_device {
 	int		lo_flags;
 	char		lo_file_name[LO_NAME_SIZE];
 
-	struct file *	lo_backing_file;
+	struct file	*lo_backing_file, *lo_backing_virt_file;
 	struct block_device *lo_device;
 
 	gfp_t		old_gfp_mask;
