@@ -15,8 +15,7 @@
 #include "rockchip_vpu2_regs.h"
 
 #define RK3066_ACLK_MAX_FREQ (300 * 1000 * 1000)
-#define RK3288_ACLK_MAX_FREQ (600 * 1000 * 1000)
-#define RK3399_ACLK_MAX_FREQ (400 * 1000 * 1000)
+#define RK3288_ACLK_MAX_FREQ (400 * 1000 * 1000)
 
 /*
  * Supported formats.
@@ -63,7 +62,6 @@ static const struct hantro_fmt rockchip_vpu1_postproc_fmts[] = {
 	{
 		.fourcc = V4L2_PIX_FMT_YUYV,
 		.codec_mode = HANTRO_MODE_NONE,
-		.postprocessed = true,
 	},
 };
 
@@ -274,17 +272,10 @@ static int rk3066_vpu_hw_init(struct hantro_dev *vpu)
 	return 0;
 }
 
-static int rk3288_vpu_hw_init(struct hantro_dev *vpu)
-{
-	/* Bump ACLK to max. possible freq. to improve performance. */
-	clk_set_rate(vpu->clocks[0].clk, RK3288_ACLK_MAX_FREQ);
-	return 0;
-}
-
 static int rockchip_vpu_hw_init(struct hantro_dev *vpu)
 {
 	/* Bump ACLK to max. possible freq. to improve performance. */
-	clk_set_rate(vpu->clocks[0].clk, RK3399_ACLK_MAX_FREQ);
+	clk_set_rate(vpu->clocks[0].clk, RK3288_ACLK_MAX_FREQ);
 	return 0;
 }
 
@@ -469,7 +460,7 @@ const struct hantro_variant rk3036_vpu_variant = {
 	.num_dec_fmts = ARRAY_SIZE(rk3066_vpu_dec_fmts),
 	.postproc_fmts = rockchip_vpu1_postproc_fmts,
 	.num_postproc_fmts = ARRAY_SIZE(rockchip_vpu1_postproc_fmts),
-	.postproc_ops = &hantro_g1_postproc_ops,
+	.postproc_regs = &hantro_g1_postproc_regs,
 	.codec = HANTRO_MPEG2_DECODER | HANTRO_VP8_DECODER |
 		 HANTRO_H264_DECODER,
 	.codec_ops = rk3036_vpu_codec_ops,
@@ -494,7 +485,7 @@ const struct hantro_variant rk3066_vpu_variant = {
 	.num_dec_fmts = ARRAY_SIZE(rk3066_vpu_dec_fmts),
 	.postproc_fmts = rockchip_vpu1_postproc_fmts,
 	.num_postproc_fmts = ARRAY_SIZE(rockchip_vpu1_postproc_fmts),
-	.postproc_ops = &hantro_g1_postproc_ops,
+	.postproc_regs = &hantro_g1_postproc_regs,
 	.codec = HANTRO_JPEG_ENCODER | HANTRO_MPEG2_DECODER |
 		 HANTRO_VP8_DECODER | HANTRO_H264_DECODER,
 	.codec_ops = rk3066_vpu_codec_ops,
@@ -514,13 +505,13 @@ const struct hantro_variant rk3288_vpu_variant = {
 	.num_dec_fmts = ARRAY_SIZE(rk3288_vpu_dec_fmts),
 	.postproc_fmts = rockchip_vpu1_postproc_fmts,
 	.num_postproc_fmts = ARRAY_SIZE(rockchip_vpu1_postproc_fmts),
-	.postproc_ops = &hantro_g1_postproc_ops,
+	.postproc_regs = &hantro_g1_postproc_regs,
 	.codec = HANTRO_JPEG_ENCODER | HANTRO_MPEG2_DECODER |
 		 HANTRO_VP8_DECODER | HANTRO_H264_DECODER,
 	.codec_ops = rk3288_vpu_codec_ops,
 	.irqs = rockchip_vpu1_irqs,
 	.num_irqs = ARRAY_SIZE(rockchip_vpu1_irqs),
-	.init = rk3288_vpu_hw_init,
+	.init = rockchip_vpu_hw_init,
 	.clk_names = rockchip_vpu_clk_names,
 	.num_clocks = ARRAY_SIZE(rockchip_vpu_clk_names)
 };
@@ -531,7 +522,8 @@ const struct hantro_variant rk3328_vpu_variant = {
 	.dec_offset = 0x400,
 	.dec_fmts = rk3399_vpu_dec_fmts,
 	.num_dec_fmts = ARRAY_SIZE(rk3399_vpu_dec_fmts),
-	.codec = HANTRO_MPEG2_DECODER | HANTRO_VP8_DECODER,
+	.codec = HANTRO_MPEG2_DECODER | HANTRO_VP8_DECODER |
+		 HANTRO_H264_DECODER,
 	.codec_ops = rk3399_vpu_codec_ops,
 	.irqs = rockchip_vdpu2_irqs,
 	.num_irqs = ARRAY_SIZE(rockchip_vdpu2_irqs),

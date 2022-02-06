@@ -388,4 +388,3 @@
 # 447 reserved for memfd_secret
 448	n32	process_mrelease		sys_process_mrelease
 449	n32	futex_waitv			sys_futex_waitv
-450	n32	pmadv_ksm			sys_pmadv_ksm

@@ -4109,14 +4109,6 @@
 		nomsi	Do not use MSI for native PCIe PME signaling (this makes
 			all PCIe root ports use INTx for all services).
 
-	pcie_rockchip_host.bus_scan_delay=	[PCIE] Delay in ms before
-			scanning PCIe bus in Rockchip PCIe host driver. Some PCIe
-			cards seem to need delays that can be several hundred ms.
-			If set to greater than or equal to 0 this parameter will
-			override delay that can be set in device tree.
-			Values less than 0 mean that this parameter is ignored.
-			default=-1
-
 	pcmv=		[HW,PCMCIA] BadgePAD 4
 
 	pd_ignore_unused
@@ -6206,22 +6198,6 @@
 			Available options are:
 			  P	Enable page structure init time poisoning
 			  -	Disable all of the above options
-
-	vm_unevictable_file_kbytes_low=nn[KMG]	[KNL]
-		Keep some file pages still mapped under memory pressure,
-		value defines a threshold to activate file pages eviction throttling.
-
-	vm_unevictable_file_kbytes_min=nn[KMG]	[KNL]
-		Keep some file pages still mapped under memory pressure,
-		value defines a hard limit.
-
-	vm_unevictable_anon_kbytes_low=nn[KMG]	[KNL]
-		Keep some anonymous pages under memory pressure,
-		value defines a threshold to throttle swapping of anonymous pages.
-
-	vm_unevictable_anon_kbytes_min=nn[KMG]	[KNL]
-		Keep some anonymous pages under memory pressure,
-		value defines a hard limit.
 
 	vmalloc=nn[KMG]	[KNL,BOOT] Forces the vmalloc area to have an exact
 			size of <nn>. This can be used to increase the

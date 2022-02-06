@@ -245,7 +245,6 @@ struct inno_hdmi_phy {
 	struct clk_hw hw;
 	struct clk *phyclk;
 	unsigned long pixclock;
-	unsigned long tmdsclock;
 };
 
 struct pre_pll_config {
@@ -317,77 +316,6 @@ static const struct pre_pll_config pre_pll_cfg_table[] = {
 	{594000000, 371250000, 4, 495, 1, 2, 0,  1, 3, 1, 1, 1, 0},
 	{593407000, 593407000, 1,  98, 0, 2, 0,  1, 0, 1, 1, 0, 0xE6AE6B},
 	{594000000, 594000000, 1,  99, 0, 2, 0,  1, 0, 1, 1, 0, 0},
-	{ 25175000,  25175000, 30, 1007, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{ 31500000,  31500000,  1,   21, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{ 33750000,  33750000,  1,   45, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{ 35500000,  35500000,  3,   71, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{ 36000000,  36000000,  1,   12, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{ 49500000,  49500000,  1,   33, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{ 50000000,  50000000,  3,   50, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{ 56250000,  56250000,  1,   75, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{ 65000000,  65000000,  3,   65, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{ 68250000,  68250000,  1,   91, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{ 71000000,  71000000,  3,   71, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{ 72000000,  72000000,  1,   24, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{ 73250000,  73250000,  3,  293, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{ 75000000,  75000000,  1,   25, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{ 78750000,  78750000,  1,  105, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{ 79500000,  79500000,  1,   53, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{ 83500000,  83500000,  3,  167, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{ 85500000,  85500000,  1,   57, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{ 88750000,  88750000,  3,  355, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{ 94500000,  94500000,  1,   63, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{101000000, 101000000,  3,  101, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{102250000, 102250000,  3,  409, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{106500000, 106500000,  1,   71, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{108000000, 108000000,  1,   36, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{115500000, 115500000,  1,   77, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{117500000, 117500000,  3,  235, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{119000000, 119000000,  3,  119, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{121750000, 121750000,  3,  487, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{122500000, 122500000,  3,  245, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{135000000, 135000000,  1,   45, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{136750000, 136750000,  3,  547, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{140250000, 140250000,  1,  187, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{146250000, 146250000,  1,  195, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{148250000, 148250000,  3,  593, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{154000000, 154000000,  3,  154, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{156000000, 156000000,  1,   52, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{156750000, 156750000,  1,  209, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{157000000, 157000000,  3,  157, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{157500000, 157500000,  1,  105, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{162000000, 162000000,  1,   54, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{175500000, 175500000,  1,  117, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{179500000, 179500000,  3,  359, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{182750000, 182750000,  3,  731, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{187000000, 187000000,  3,  187, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{187250000, 187250000,  3,  749, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{189000000, 189000000,  1,   63, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{193250000, 193250000,  3,  773, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{202500000, 202500000,  1,  135, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{204750000, 204750000,  1,  273, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{208000000, 208000000,  3,  208, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{214750000, 214750000,  3,  859, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{218250000, 218250000,  1,  291, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{229500000, 229500000,  1,  153, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{234000000, 234000000,  1,   78, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{241500000, 241500000,  1,  161, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{245250000, 245250000,  1,  327, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{245500000, 245500000,  3,  491, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{261000000, 261000000,  1,   87, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{268250000, 268250000,  3, 1073, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{268500000, 268500000,  1,  179, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{281250000, 281250000,  1,  375, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{288000000, 288000000,  1,   96, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{312250000, 312250000,  3, 1249, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{317000000, 317000000,  3,  317, 0, 1, 1, 1, 0, 2, 2, 0, 0},
-	{333250000, 333250000,  3, 1333, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{348500000, 348500000,  3,  697, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{356500000, 356500000,  3,  713, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{380500000, 380500000,  3,  761, 1, 1, 1, 1, 2, 2, 2, 0, 0},
-	{443250000, 443250000,  1,  591, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{505250000, 505250000,  3, 2021, 1, 2, 2, 1, 2, 3, 4, 0, 0},
-	{552750000, 552750000,  1,  737, 1, 2, 2, 1, 2, 3, 4, 0, 0},
 	{ /* sentinel */ }
 };
 
@@ -557,8 +485,6 @@ static int inno_hdmi_phy_power_on(struct phy *phy)
 
 	dev_dbg(inno->dev, "Inno HDMI PHY Power On\n");
 
-	inno->plat_data->clk_ops->set_rate(&inno->hw, inno->pixclock, 24000000);
-
 	ret = clk_prepare_enable(inno->phyclk);
 	if (ret)
 		return ret;
@@ -582,8 +508,6 @@ static int inno_hdmi_phy_power_off(struct phy *phy)
 	inno->plat_data->ops->power_off(inno);
 
 	clk_disable_unprepare(inno->phyclk);
-
-	inno->tmdsclock = 0;
 
 	dev_dbg(inno->dev, "Inno HDMI PHY Power Off\n");
 
@@ -704,9 +628,6 @@ static int inno_hdmi_phy_rk3228_clk_set_rate(struct clk_hw *hw,
 	dev_dbg(inno->dev, "%s rate %lu tmdsclk %lu\n",
 		__func__, rate, tmdsclock);
 
-	if (inno->pixclock == rate && inno->tmdsclock == tmdsclock)
-		return 0;
-
 	cfg = inno_hdmi_phy_get_pre_pll_cfg(inno, rate);
 	if (IS_ERR(cfg))
 		return PTR_ERR(cfg);
@@ -749,7 +670,6 @@ static int inno_hdmi_phy_rk3228_clk_set_rate(struct clk_hw *hw,
 	}
 
 	inno->pixclock = rate;
-	inno->tmdsclock = tmdsclock;
 
 	return 0;
 }
@@ -794,7 +714,7 @@ unsigned long inno_hdmi_phy_rk3328_clk_recalc_rate(struct clk_hw *hw,
 {
 	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
 	unsigned long frac;
-	u8 nd, no_a, no_b, no_d;
+	u8 nd, no_a, no_b, no_c, no_d;
 	u64 vco;
 	u16 nf;
 
@@ -817,17 +737,18 @@ unsigned long inno_hdmi_phy_rk3328_clk_recalc_rate(struct clk_hw *hw,
 		no_b = inno_read(inno, 0xa5) & RK3328_PRE_PLL_PCLK_DIV_B_MASK;
 		no_b >>= RK3328_PRE_PLL_PCLK_DIV_B_SHIFT;
 		no_b += 2;
+		no_c = inno_read(inno, 0xa6) & RK3328_PRE_PLL_PCLK_DIV_C_MASK;
+		no_c >>= RK3328_PRE_PLL_PCLK_DIV_C_SHIFT;
+		no_c = 1 << no_c;
 		no_d = inno_read(inno, 0xa6) & RK3328_PRE_PLL_PCLK_DIV_D_MASK;
 
 		do_div(vco, (nd * (no_a == 1 ? no_b : no_a) * no_d * 2));
 	}
 
-	inno->pixclock = DIV_ROUND_CLOSEST((unsigned long)vco, 1000) * 1000;
+	inno->pixclock = vco;
+	dev_dbg(inno->dev, "%s rate %lu\n", __func__, inno->pixclock);
 
-	dev_dbg(inno->dev, "%s rate %lu vco %llu\n",
-		__func__, inno->pixclock, vco);
-
-	return inno->pixclock;
+	return vco;
 }
 
 static long inno_hdmi_phy_rk3328_clk_round_rate(struct clk_hw *hw,
@@ -861,9 +782,6 @@ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
 	dev_dbg(inno->dev, "%s rate %lu tmdsclk %lu\n",
 		__func__, rate, tmdsclock);
 
-	if (inno->pixclock == rate && inno->tmdsclock == tmdsclock)
-		return 0;
-
 	cfg = inno_hdmi_phy_get_pre_pll_cfg(inno, rate);
 	if (IS_ERR(cfg))
 		return PTR_ERR(cfg);
@@ -872,8 +790,8 @@ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
 			 RK3328_PRE_PLL_POWER_DOWN);
 
 	/* Configure pre-pll */
-	inno_update_bits(inno, 0xa0, RK3328_PCLK_VCO_DIV_5_MASK,
-			 RK3328_PCLK_VCO_DIV_5(cfg->vco_div_5_en));
+	inno_update_bits(inno, 0xa0, RK3228_PCLK_VCO_DIV_5_MASK,
+			 RK3228_PCLK_VCO_DIV_5(cfg->vco_div_5_en));
 	inno_write(inno, 0xa1, RK3328_PRE_PLL_PRE_DIV(cfg->prediv));
 
 	val = RK3328_SPREAD_SPECTRUM_MOD_DISABLE;
@@ -903,7 +821,6 @@ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
 	}
 
 	inno->pixclock = rate;
-	inno->tmdsclock = tmdsclock;
 
 	return 0;
 }
@@ -1104,10 +1021,9 @@ inno_hdmi_phy_rk3328_power_on(struct inno_hdmi_phy *inno,
 
 	inno_write(inno, 0xac, RK3328_POST_PLL_FB_DIV_7_0(cfg->fbdiv));
 	if (cfg->postdiv == 1) {
+		inno_write(inno, 0xaa, RK3328_POST_PLL_REFCLK_SEL_TMDS);
 		inno_write(inno, 0xab, RK3328_POST_PLL_FB_DIV_8(cfg->fbdiv) |
 			   RK3328_POST_PLL_PRE_DIV(cfg->prediv));
-		inno_write(inno, 0xaa, RK3328_POST_PLL_REFCLK_SEL_TMDS |
-			   RK3328_POST_PLL_POWER_DOWN);
 	} else {
 		v = (cfg->postdiv / 2) - 1;
 		v &= RK3328_POST_PLL_POST_DIV_MASK;
@@ -1115,8 +1031,7 @@ inno_hdmi_phy_rk3328_power_on(struct inno_hdmi_phy *inno,
 		inno_write(inno, 0xab, RK3328_POST_PLL_FB_DIV_8(cfg->fbdiv) |
 			   RK3328_POST_PLL_PRE_DIV(cfg->prediv));
 		inno_write(inno, 0xaa, RK3328_POST_PLL_POST_DIV_ENABLE |
-			   RK3328_POST_PLL_REFCLK_SEL_TMDS |
-			   RK3328_POST_PLL_POWER_DOWN);
+			   RK3328_POST_PLL_REFCLK_SEL_TMDS);
 	}
 
 	for (v = 0; v < 14; v++)

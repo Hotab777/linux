@@ -56,10 +56,8 @@ properties:
           - enum:
               - amlogic,p200
               - amlogic,p201
-              - beelink,mini-mxiii
               - friendlyarm,nanopi-k2
               - hardkernel,odroid-c2
-              - minix,neo-u1
               - nexbox,a95x
               - videostrong,kii-pro
               - wetek,hub
@@ -145,7 +143,6 @@ properties:
           - enum:
               - amediatech,x96-max
               - amlogic,u200
-              - oranth,tx5-max
               - radxa,zero
               - seirobotics,sei510
           - const: amlogic,g12a
@@ -173,14 +170,9 @@ properties:
       - description: Boards with the Amlogic Meson SM1 S905X3/D3/Y3 SoC
         items:
           - enum:
-              - amediatech,x96-air
-              - amediatech,x96-air-gbit
               - bananapi,bpi-m5
-              - cyx,a95xf3-air
-              - cyx,a95xf3-air-gbit
               - hardkernel,odroid-c4
               - hardkernel,odroid-hc4
-              - haochuangyi,h96-max
               - khadas,vim3l
               - seirobotics,sei610
           - const: amlogic,sm1
